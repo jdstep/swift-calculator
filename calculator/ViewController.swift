@@ -22,20 +22,34 @@ class ViewController: UIViewController {
     
     switch operation {
       
-    case "×": println("in switch with ×")
-      
-    default : println("nothing happened in switch")
+    case "×": performOperation() { $1 * $0 }
+    case "÷": performOperation() { $1 / $0 }
+    case "−": performOperation() { $1 - $0 }
+    case "+": performOperation() { $1 + $0 }
+    case "√": performOperationOneArg() { sqrt($0) }
+  
+    default : println("ERROR: no cases matched operation switch")
       
     }
   
   }
   
-  func resetDisplayNum() {
-    numDisplay.text! = "0"
+  // handle generic math functions with two arguments
+  func performOperation(operationFunc: (Double, Double) -> Double) {
+    if (numStack.count >= 2) {
+      currentDisplayNum = operationFunc(numStack.removeLast(), numStack.removeLast())
+      enter()
+    }
   }
   
+  // handle generic math functions with one argument
+  func performOperationOneArg(operationFunc: (Double) -> Double) {
+    if (numStack.count >= 1) {
+      currentDisplayNum = operationFunc(numStack.removeLast())
+      enter()
+    }
+  }
   
-    
  
   var numStack = Array<Double>()
   
@@ -45,6 +59,7 @@ class ViewController: UIViewController {
       return NSNumberFormatter().numberFromString(numDisplay.text!)!.doubleValue
     }
     set {
+      println("trying to set new value to \(newValue)")
       numDisplay.text! = "\(newValue)"
     }
   }
@@ -53,7 +68,6 @@ class ViewController: UIViewController {
   @IBAction func enter() {
     numStack.append(currentDisplayNum)
     userIsTyping = false
-    println(numStack)
   }
   
   
