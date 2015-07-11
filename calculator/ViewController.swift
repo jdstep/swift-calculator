@@ -26,9 +26,7 @@ class ViewController: UIViewController {
             userIsTyping = true
         }
         
-        
-//        numDisplay.text = digit
-        
+            
     }
 }
 
