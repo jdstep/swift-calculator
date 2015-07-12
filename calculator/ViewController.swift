@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     }
     
     if let operation = sender.currentTitle {
+      println("calling operation in view")
       if let result = brain.performOperation(operation) {
         currentDisplayNum = result
       } else {
@@ -35,8 +36,6 @@ class ViewController: UIViewController {
       }
     }
     
-    brain.performOperation(operation)
-
   
   }
   
@@ -74,7 +73,6 @@ class ViewController: UIViewController {
       return NSNumberFormatter().numberFromString(numDisplay.text!)!.doubleValue
     }
     set {
-      println("trying to set new value to \(newValue)")
       numDisplay.text! = "\(newValue)"
     }
   }

@@ -10,9 +10,8 @@ import Foundation
 
 class CalculatorBrain {
     
-  var opStack = [Op]()
-    
-  enum Op: Printable {
+  
+  private enum Op: Printable {
     case Operand(Double)
     case UnaryOperation(String, Double -> Double)
     case BinaryOperation(String, (Double, Double) -> Double)
@@ -41,7 +40,10 @@ class CalculatorBrain {
     }
   }
   
-  var knownOps = [String:Op]()
+  private var opStack = [Op]()
+
+  
+  private var knownOps = [String:Op]()
   
   init() {
     knownOps["×"] = Op.BinaryOperation("×", *)
@@ -53,8 +55,9 @@ class CalculatorBrain {
     knownOps["cos"] = Op.UnaryOperation("cos", cos)
   }
   
+  
   // recursively performs the operations on the operands
-  func evaluate(ops: [Op]) -> (result: Double?, remainingOps: [Op]) {
+  private func evaluate(ops: [Op]) -> (result: Double?, remainingOps: [Op]) {
     // if there are still remaining operands
     if !ops.isEmpty {
       // store the remaining operands
@@ -100,7 +103,7 @@ class CalculatorBrain {
 
   func evaluateAll() -> Double? {
     let (result, remainder) = evaluate(opStack)
-    println("\(result) is the result with \(remainder) left over")
+    println("\(opStack) = \(result) with \(remainder) left over")
     return result
   }
   
