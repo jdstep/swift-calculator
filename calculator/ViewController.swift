@@ -27,6 +27,9 @@ class ViewController: UIViewController {
     case "−": performOperation() { $1 - $0 }
     case "+": performOperation() { $1 + $0 }
     case "√": performOperationOneArg() { sqrt($0) }
+    case "sin": performOperationOneArg() { sin($0) }
+    case "cos": performOperationOneArg() { cos($0) }
+
   
     default : println("ERROR: no cases matched operation switch")
       
