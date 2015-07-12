@@ -39,6 +39,10 @@ class ViewController: UIViewController {
   
   }
   
+  @IBAction func clearAll() {
+    brain.clearAll()
+    currentDisplayNum = 0
+  }
   @IBAction func appendDigit(sender: UIButton) {
     let digit = sender.currentTitle!
     
