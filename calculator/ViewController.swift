@@ -94,6 +94,7 @@ class ViewController: UIViewController {
         enteredDot = true
       }
     }
+
     if (userIsTyping) {
       numDisplay.text = numDisplay.text! + digit
     } else {
@@ -103,5 +104,21 @@ class ViewController: UIViewController {
       
       
   }
+  
+  @IBAction func addConstant(sender: UIButton) {
+    let mathConstant = sender.currentTitle!
+    
+    
+    numDisplay.text = mathConstant
+    
+    switch mathConstant {
+    case "π": numDisplay.text! = "3.14159"
+    default: "ERROR: math constant is not present"
+    }
+    
+    
+  }
+  
+ 
 }
 
