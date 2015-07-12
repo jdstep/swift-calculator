@@ -68,16 +68,29 @@ class ViewController: UIViewController {
   @IBAction func enter() {
     numStack.append(currentDisplayNum)
     userIsTyping = false
+    enteredDot = false
   }
   
   
-  
-  
+  // keeps track if the current number is a decimal
+  var enteredDot = false;
     
     
     
   @IBAction func appendDigit(sender: UIButton) {
     let digit = sender.currentTitle!
+    
+    // if the user tapped the decimal button
+    if (digit == ".") {
+      // if a decimal was already entered in the number
+      if (enteredDot) {
+        // eject from the function
+        return
+      } else {
+        // remember that we entered a decimal, and proceed with the rest of the function
+        enteredDot = true
+      }
+    }
     if (userIsTyping) {
       numDisplay.text = numDisplay.text! + digit
     } else {
