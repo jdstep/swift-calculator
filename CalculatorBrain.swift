@@ -12,10 +12,33 @@ class CalculatorBrain {
     
   var opStack = [Op]()
     
-  enum Op {
+  enum Op: Printable {
     case Operand(Double)
     case UnaryOperation(String, Double -> Double)
     case BinaryOperation(String, (Double, Double) -> Double)
+    
+    // handles println logic
+    // because if you print a custom type it just shows as 
+    // (Enum Value)
+    var description: String {
+      // while performing a println call on this value
+      get {
+        switch self {
+        // if the value is an operand
+        case .Operand(let operand):
+          // return the stringified version of the operand
+          return "\(operand)"
+        // if the value is a unary operation
+        case .UnaryOperation(let symbol, _):
+          // return only the symbol, which is already a string
+          return symbol
+        // if the value is a binary operation
+        case .BinaryOperation(let symbol, _):
+          // return only the symbol, which is already a string
+          return symbol
+        }
+      }
+    }
   }
   
   var knownOps = [String:Op]()
